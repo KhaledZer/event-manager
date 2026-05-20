@@ -5,6 +5,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import errorHandler from './errorHandler.js';
 import authRouter from './auth/auth.router.js';
+import eventRouter from './events/event.router.js';
 
 const app: Application = express();
 
@@ -13,7 +14,8 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api/auth', authRouter);
-app.get('/health', (req, res) => {
+app.use('/api/events', eventRouter);
+app.get('/health', (_req, res) => {
   res.status(200).json({ status: 'OK' });
 });
 
